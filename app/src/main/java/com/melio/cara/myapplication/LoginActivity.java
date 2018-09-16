@@ -1,25 +1,18 @@
 package com.melio.cara.myapplication;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.AsyncTask;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,9 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * A login screen that offers login via email/password.
@@ -47,7 +37,7 @@ public class LoginActivity extends AppCompatActivity{
     private UserRegisterTask mRegTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -60,10 +50,10 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mUsernameView = findViewById(R.id.email);
 
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -76,7 +66,7 @@ public class LoginActivity extends AppCompatActivity{
         });
 
 
-        Button mUserSignInButton = (Button) findViewById(R.id.login_button);
+        Button mUserSignInButton = findViewById(R.id.login_button);
         mUserSignInButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -85,7 +75,7 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-        Button mUserRegisterButton = (Button) findViewById(R.id.register_button);
+        Button mUserRegisterButton = findViewById(R.id.register_button);
         mUserRegisterButton.setOnClickListener(new OnClickListener(){
             @Override
             public  void onClick(View view){
@@ -104,11 +94,11 @@ public class LoginActivity extends AppCompatActivity{
         }
 
         // Reset errors.
-        mEmailView.setError(null);
+        mUsernameView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String email = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -123,12 +113,12 @@ public class LoginActivity extends AppCompatActivity{
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            mUsernameView.setError(getString(R.string.error_field_required));
+            focusView = mUsernameView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+        } else if (!isUsernameValid(email)) {
+            mUsernameView.setError(getString(R.string.error_invalid_email));
+            focusView = mUsernameView;
             cancel = true;
         }
 
@@ -151,11 +141,11 @@ public class LoginActivity extends AppCompatActivity{
         }
 
         // Reset errors.
-        mEmailView.setError(null);
+        mUsernameView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -168,14 +158,14 @@ public class LoginActivity extends AppCompatActivity{
             cancel = true;
         }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+        // Check for a valid username address.
+        if (TextUtils.isEmpty(username)) {
+            mUsernameView.setError(getString(R.string.error_field_required));
+            focusView = mUsernameView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+        } else if (!isUsernameValid(username)) {
+            mUsernameView.setError(getString(R.string.error_invalid_email));
+            focusView = mUsernameView;
             cancel = true;
         }
 
@@ -187,14 +177,14 @@ public class LoginActivity extends AppCompatActivity{
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             //showProgress(true);
-            mRegTask = new UserRegisterTask(email, password);
+            mRegTask = new UserRegisterTask(username, password);
             mRegTask.execute((Void) null);
         }
     }
 
-    private boolean isEmailValid(String email) {
+    private boolean isUsernameValid(String username) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return !username.matches("^.*[^a-zA-Z0-9 ].*$");
     }
 
     private boolean isPasswordValid(String password) {
@@ -248,23 +238,24 @@ public class LoginActivity extends AppCompatActivity{
     @SuppressLint("StaticFieldLeak")
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
+        private final String mUsername;
         private final String mPassword;
 
-        UserLoginTask(String email, String password) {
-            mEmail = email;
+        UserLoginTask(String username, String password) {
+            mUsername = username;
             mPassword = password;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            Query query = databaseRef.child("users").equalTo(mEmail.trim());
+            Query query = databaseRef.child("users").orderByChild("username").equalTo(mUsername.trim());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()){
                         for (DataSnapshot user: dataSnapshot.getChildren()){
                                 User databaseUser = user.getValue(User.class);
+                                Log.d("testing user data", "User username: " + databaseUser.username + "\t User password: " + databaseUser.password);
 
                             if (databaseUser.password.equals(mPassword.trim())){
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -272,10 +263,14 @@ public class LoginActivity extends AppCompatActivity{
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "Password is wrong", Toast.LENGTH_LONG).show();
+                                Log.d("testing input", "Error: Password is wrong");
+                                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             }
                         }
                     } else{
-                        Toast.makeText(getApplicationContext(), "Email not registered", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "username not registered", Toast.LENGTH_LONG).show();
+                        Log.d("testing input", "Error: username not registered");
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     }
                 }
 
@@ -314,25 +309,25 @@ public class LoginActivity extends AppCompatActivity{
 
     public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
         //Log.v("msg"","Hello")
-        private final String mEmail;
+        private final String mUsername;
         private final String mPassword;
 
-        UserRegisterTask(String email, String password) {
-            mEmail = email;
+        UserRegisterTask(String username, String password) {
+            mUsername = username;
             mPassword = password;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            Query query = databaseRef.child("users").equalTo(mEmail.trim());
+            Query query = databaseRef.child("users").equalTo(mUsername.trim());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!dataSnapshot.exists()){
-                        //Toast.makeText(getApplicationContext(), "Email not registered", Toast.LENGTH_LONG).show();
-                        databaseRef.child("users").child("email").setValue(mEmail);
-                        databaseRef.child("users").child("password").setValue(mPassword);
+                        //Toast.makeText(getApplicationContext(), "username not registered", Toast.LENGTH_LONG).show();
+                        User newUser = new User(mUsername, mPassword);
+                        databaseRef.child("users").child(mUsername).setValue(newUser); 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     }
