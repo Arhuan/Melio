@@ -39,6 +39,16 @@ public class ModActivity extends AppCompatActivity {
 
         ArrayAdapter<Post> arrayAdapter = new ArrayAdapter<Post>(this, android.R.layout.simple_list_item_1, (List<Post>) postList);
         postList.setAdapter(arrayAdapter);
+
+//        listView.setOnItemClickListener(new OnItemClickListener() {
+//
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Object o = prestListView.getItemAtPosition(position);
+//                prestationEco str = (prestationEco)o; //As you are using Default String Adapter
+//                Toast.makeText(getBaseContext(),str.getTitle(),Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
         FloatingActionButton returnButton = (FloatingActionButton) findViewById(R.id.returnMain);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +77,7 @@ public class ModActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
     }
+
 
 }
