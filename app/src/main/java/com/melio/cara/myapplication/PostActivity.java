@@ -3,6 +3,7 @@ package com.melio.cara.myapplication;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,8 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class PostActivity extends AppCompatActivity {
 
-    private TextInputLayout inpHead;
-    private TextInputLayout inpBody;
+    private TextInputEditText inpHead;
+    private TextInputEditText inpBody;
 
     private DatabaseReference databaseRef;
     //databaseRef = FirebaseDatabase.getInstance().getReference();
@@ -48,8 +49,8 @@ public class PostActivity extends AppCompatActivity {
     }
 
     public void createPost(){
-        String header = inpHead.getEditText().toString();
-        String body = inpBody.getEditText().toString();
+        String header = inpHead.getText().toString();
+        String body = inpBody.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
