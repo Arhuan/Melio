@@ -32,7 +32,6 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class LoginActivity extends AppCompatActivity{
 
-
     private UserLoginTask mAuthTask = null;
     private UserRegisterTask mRegTask = null;
 
