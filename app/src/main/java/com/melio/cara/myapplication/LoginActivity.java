@@ -60,10 +60,10 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
 
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity{
         });
 
 
-        Button mUserSignInButton = (Button) findViewById(R.id.login_button);
+        Button mUserSignInButton = findViewById(R.id.login_button);
         mUserSignInButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-        Button mUserRegisterButton = (Button) findViewById(R.id.register_button);
+        Button mUserRegisterButton = findViewById(R.id.register_button);
         mUserRegisterButton.setOnClickListener(new OnClickListener(){
             @Override
             public  void onClick(View view){
@@ -265,6 +265,7 @@ public class LoginActivity extends AppCompatActivity{
                     if (dataSnapshot.exists()){
                         for (DataSnapshot user: dataSnapshot.getChildren()){
                                 User databaseUser = user.getValue(User.class);
+                                Log.d("testing user data", "User email: " + databaseUser.email + "\t User password: " + databaseUser.password);
 
                             if (databaseUser.password.equals(mPassword.trim())){
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -272,10 +273,14 @@ public class LoginActivity extends AppCompatActivity{
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "Password is wrong", Toast.LENGTH_LONG).show();
+                                Log.d("testing input", "Error: Password is wrong");
+                                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                             }
                         }
                     } else{
                         Toast.makeText(getApplicationContext(), "Email not registered", Toast.LENGTH_LONG).show();
+                        Log.d("testing input", "Error: Email not registered");
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     }
                 }
 
