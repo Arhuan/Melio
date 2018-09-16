@@ -331,8 +331,8 @@ public class LoginActivity extends AppCompatActivity{
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!dataSnapshot.exists()){
                         //Toast.makeText(getApplicationContext(), "Email not registered", Toast.LENGTH_LONG).show();
-                        databaseRef.child("users").child("email").setValue(mEmail);
-                        databaseRef.child("users").child("password").setValue(mPassword);
+                        User newUser = new User(mEmail, mPassword);
+                        databaseRef.child("users").child(mEmail).setValue(newUser); 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     }
