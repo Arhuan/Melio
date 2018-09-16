@@ -248,7 +248,7 @@ public class LoginActivity extends AppCompatActivity{
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            Query query = databaseRef.child("users").equalTo(mUsername.trim());
+            Query query = databaseRef.child("users").orderByChild("username").equalTo(mUsername.trim());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
