@@ -16,6 +16,4 @@ public class localUsernameSingleton {
         }
         return instance;
     }
-
-
 }
