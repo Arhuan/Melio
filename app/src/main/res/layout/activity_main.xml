@@ -26,6 +26,15 @@
         android:layout_marginRight="148dp"
         android:layout_marginTop="4dp"
         android:text="Button"
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/MELIO"
+        android:textSize="30sp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
