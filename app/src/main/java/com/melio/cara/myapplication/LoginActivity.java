@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity{
 
     private void runDemo(){
         List<String> testUsernames = new ArrayList<>();
+
     }
 
     private void attemptLogin() {
