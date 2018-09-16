@@ -26,6 +26,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A login screen that offers login via email/password.
@@ -89,6 +92,10 @@ public class LoginActivity extends AppCompatActivity{
         });
     }
 
+
+    private void runDemo(){
+        List<String> testUsernames = new ArrayList<>();
+    }
 
     private void attemptLogin() {
         if (mAuthTask != null) {
