@@ -33,9 +33,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         Button chatButton = findViewById(R.id.roomButton);
-
+        Button postButton = findViewById(R.id.PostAdd);
         getPosts();
-
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), PostActivity.class));
+            }
+        });
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

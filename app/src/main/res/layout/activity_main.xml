@@ -13,17 +13,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/room"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/PostAdd"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/PostAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
-        android:text="Button"
+        android:text="Add Post"
         app:layout_constraintLeft_toRightOf="@+id/roomButton"
         tools:layout_editor_absoluteY="4dp" />
 
@@ -51,7 +51,7 @@
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.958"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/PostAdd"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
@@ -68,6 +68,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/PostAdd" />
 
 </android.support.constraint.ConstraintLayout>
