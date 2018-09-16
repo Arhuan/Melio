@@ -326,7 +326,8 @@ public class LoginActivity extends AppCompatActivity{
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!dataSnapshot.exists()){
-                        localUsernameSingleton.getInstance(mUsername);
+                        localUsernameSingleton test = localUsernameSingleton.getInstance(mUsername);
+                        Log.d("Singleton String = ", test.LocalUsername);
                         User newUser = new User(mUsername, mPassword);
                         databaseRef.child("users").child(mUsername).setValue(newUser); 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
