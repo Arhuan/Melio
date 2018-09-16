@@ -1,5 +1,6 @@
 package com.melio.cara.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +30,7 @@ public class Quiz extends AppCompatActivity {
                     "I was scared that I would lose control, go crazy, or die."
             };
 
-    private ArrayList<Integer> answers = new ArrayList<>();
+    private int[] answers = new int[12];
     private int x = 0;
     private TextView questionText;
     private RadioGroup radioGroup;
@@ -66,15 +67,14 @@ public class Quiz extends AppCompatActivity {
         if(x < question.length){
             questionText.setText(question[x]);
             if (selected != -1){
-                answers.add(selected);
+                answers[x] = selected;
                 radioGroup.clearCheck();
             }
-            Log.d("Quiz.java TESTING:   ", "checked button: " + answers);
+            Log.d("Quiz.java TESTING:   ", "answers: " + answers);
         }
         else{
-            //END
-            Log.d("Quiz.java TESTING:   ", "checked button: " + answers);
+            Log.d("Quiz.java TESTING:   ", "answers: " + answers);
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
-
     }
 }

@@ -5,6 +5,7 @@ public class User {
     public String username;
     public String password;
     public Boolean isModerator;
+    public int[] answers;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -14,6 +15,10 @@ public class User {
         this.username = username;
         this.password = password;
         this.isModerator=false;
+    }
+
+    public void setAnswers(int[] answers){
+        this.answers = answers;
     }
 
     public void setModeratorStatus(Boolean newStatus){
