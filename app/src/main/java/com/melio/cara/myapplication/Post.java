@@ -17,6 +17,8 @@ public class Post {
         this.postdate = new Date();
     }
 
+    public Post(){}
+
     public String getHeader(){
         return this.header;
     }
