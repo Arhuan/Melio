@@ -1,18 +1,23 @@
 package com.melio.cara.myapplication;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ChatActivity extends AppCompatActivity {
-    private String databaseRef;
+    private DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
 
     // TODO: add class to databaseRef, and implement getUser
     @Override
@@ -29,15 +34,16 @@ public class ChatActivity extends AppCompatActivity {
                 EditText input = (EditText) findViewById(R.id.edittext_chatbox);
 
                 // Read the input field and display the ChatMessage
-                displayChatMessage(new ChatMessage(input.getText(), databaseRef.getUser()));
+                databaseRef.push().setValue(new ChatMessage(input.getText(), something));
 
                 // Clear the input after message has been sent
                 input.setText("");
             }
         });
+
+        displayChatMessage();
     }
 
     public void displayChatMessage() {
 
-    }
 }
