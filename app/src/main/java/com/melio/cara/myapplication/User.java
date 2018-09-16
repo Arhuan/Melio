@@ -2,7 +2,7 @@ package com.melio.cara.myapplication;
 
 public class User {
 
-    public String email;
+    public String username;
     public String password;
     public Boolean isModerator;
 
@@ -10,8 +10,8 @@ public class User {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String email,String password) {
-        this.email = email;
+    public User(String username,String password) {
+        this.username = username;
         this.password = password;
         this.isModerator=false;
     }
