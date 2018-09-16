@@ -21,7 +21,7 @@ public class ChatMessage {
         this.body = text;
     }
 
-    public void setSender(String sender) {
+    public void setSender(User sender) {
         this.sender = sender;
     }
 

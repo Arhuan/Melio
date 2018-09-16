@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by aahuangg on 2018-09-15.
  */
-
+/*
 public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
@@ -120,3 +120,4 @@ public class MessageListAdapter extends RecyclerView.Adapter {
         }
     }
 }
+*/

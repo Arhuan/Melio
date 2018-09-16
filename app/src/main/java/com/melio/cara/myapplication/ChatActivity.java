@@ -14,9 +14,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class ChatActivity extends AppCompatActivity {
     private DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
@@ -37,7 +39,7 @@ public class ChatActivity extends AppCompatActivity {
                 EditText input = (EditText) findViewById(R.id.edittext_chatbox);
 
                 // Read the input field and display the ChatMessage
-                databaseRef.push().setValue(new ChatMessage(input.getText(), something));
+                databaseRef.push().setValue(new ChatMessage(input.getText().toString(), new User("aaron", "12345")));
 
                 // Clear the input after message has been sent
                 input.setText("");
@@ -48,10 +50,16 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     public void displayChatMessage() {
-        ListView listOfMessages = (ListView) findViewById(R.id.listview_message_list);
+        ListView listMessages = (ListView) findViewById(R.id.listview_message_list);
 
-        adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class,
-                R.layout.message, FirebaseDatabase.getInstance().getReference()) {
+        Query query = this.databaseRef.child("username");
+
+        FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
+                .setQuery(query, ChatMessage.class)
+                .setLayout(R.layout.item_message_sent)
+                .build();
+
+        adapter = new FirebaseListAdapter<ChatMessage>(options) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
                 // Get references to the views of message.xml
@@ -61,7 +69,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 // Set their text
                 messageText.setText(model.getBody());
-                messageUser.setText(model.getSender().getEmail());
+                messageUser.setText(model.getSender().username);
 
                 // Format the date before showing it
                 messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
@@ -69,7 +77,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        listOfMessages.setAdapter(adapter);
+        listMessages.setAdapter(adapter);
     }
 
 }
