@@ -18,7 +18,6 @@ public class localUsernameSingleton {
     }
 
     public static localUsernameSingleton getKnownInstance(){
-
         return instance;
     }
 

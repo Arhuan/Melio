@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,25 +19,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 public class Quiz extends AppCompatActivity {
     private String[] question = new String[]
-            {"I was very anxious, worried or scared about a lot of things in my life.",
-                    "I felt that my worry was out of my control.",
-                    "I felt restless, agitated, frantic, or tense.",
-                    "I had trouble sleeping - I could not fall or stay asleep, and/or didn't feel well-rested when I woke up.",
-                    "My heart would skip beat, was pounding, or my heart rate increased.",
-                    "I was sweating profusely.",
-                    "My hands, legs or entire body were shaking, trembling, or felt tingly.",
+            {
+                    "I had difficulty concentrating.",
+                    "I had difficulty sleeping. It was hard to fall or stay asleep.",
                     "I had difficulty breathing or swallowing.",
-                    "I had pain in my chest, almost like I was having a heart attack.",
-                    "I felt sick to my stomach, like I was going to throw up.",
-                    "I felt dizzy, my head was spinning, or felt like I was going to faint.",
-                    "I was scared that I would lose control, go crazy, or die."
+                    "I had difficulty getting out of bed.",
+                    "My limbs would shake, tremble, or tingle.",
+                    "I felt restless, agitated, or tense.",
+                    "I felt like a burden.",
+                    "I felt pain in my chest, almost like I was having a heart attack.",
+                    "I felt sick to my stomach, almost like I was going to throw up.",
+                    "I felt dizzy, almost like I was going to faint.",
+                    "I felt very anxious, worried or scared about things in my life.",
+                    "I felt an overwhelming urge to drink alcohol or abuse other substances."
             };
 
     public int x = 0;
@@ -45,7 +44,8 @@ public class Quiz extends AppCompatActivity {
     private RadioGroup radioGroup;
     private int selected = -1;
     private int normal = 2131230858;
-    private updateAnswers uAnswers;
+    private int[] results = new int[12];
+    private updateRecommendations mRecommendations;
     private DatabaseReference databaseRef;
 
     @Override
@@ -77,26 +77,99 @@ public class Quiz extends AppCompatActivity {
         if(x < question.length){
             questionText.setText(question[x]);
             if (picked != -1){
-                uAnswers = new Quiz.updateAnswers(picked, x);
-                uAnswers.execute((Void) null);
+                results[x] = picked;
                 radioGroup.clearCheck();
                 x++;
             }
         }
         else{
+            recommendations();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
         }
     }
 
-    public class updateAnswers extends AsyncTask<Void, Void, Boolean> {
-        //Log.v("msg"","Hello")
-        private int answers;
-        private String index;
 
-        updateAnswers(int inpAnswers, int fax) {
+    public void recommendations(){
+        float PTSD = 0;
+        float depression = 0;
+        float anxiety = 0;
+        float substance = 0;
+        float suicidal = 0;
+
+        for (int m = 0; m < 12; m++){
+            if (m == 0) {
+                PTSD += results[m]/3;
+                substance += results[m]/3;
+            }
+            else if (m == 1){
+                PTSD += results[m]/5;
+                substance += results[m]/5;
+                depression += results[m]/5;
+                anxiety += results[m]/5;
+                suicidal += results[m]/5;
+            }
+            else if (m == 2){
+                PTSD += results[m]/3;
+                anxiety += results[m]/3;
+            }
+            else if (m == 3){
+                depression += results[m]/2;
+            }
+            else if (m == 4){
+                substance += results[m]/3;
+                anxiety += results[m]/3;
+            }
+            else if (m == 5){
+                PTSD += results[m]/3;
+                suicidal += results[m]/3;
+            }
+            else if (m == 6){
+                depression += results[m]/3;
+                suicidal += results[m]/3;
+            }
+            else if (m == 7){
+                depression += results[m]/3;
+                suicidal += results[m]/3;
+            }
+            else if (m == 8){
+                depression += results[m]/3;
+                substance += results[m]/3;
+            }
+            else if (m == 9){
+                anxiety += results[m]/3;
+                substance += results[m]/3;
+            }
+            else if (m == 10){
+                anxiety += results[m]/2;
+            }
+            else if (m == 11){
+                substance += results[m]/2;
+            }
+        }
+
+        ArrayList<Float> sorting = new ArrayList<>();
+        sorting.add(PTSD);
+        sorting.add(depression);
+        sorting.add(anxiety);
+        sorting.add(substance);
+        sorting.add(suicidal);
+
+        Log.d("testttt", "lisst: " + sorting);
+
+        String msg = "Here are your results: \t" + "PTSD: " + PTSD + " Depression: " + depression + " Anxiety: " + anxiety + " Substance Abuse: " + substance + " Suicidal: " + suicidal;
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+
+        mRecommendations = new updateRecommendations(sorting);
+        mRecommendations.execute((Void) null);
+    }
+
+
+
+    public class updateRecommendations extends AsyncTask<Void, Void, Boolean> {
+        private ArrayList<Float> answers;
+
+        updateRecommendations(ArrayList<Float> inpAnswers) {
             answers = inpAnswers;
-            index = String.valueOf(fax);
         }
 
         @Override
@@ -107,13 +180,15 @@ public class Quiz extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()){
-                        databaseRef.child(localUsernameSingleton.getKnownInstance().LocalUsername).child("answers").child(index).setValue(answers);
+                        for (int m = 0; m < 5; m++){
+                            String index = String.valueOf(m);
+                            databaseRef.child(localUsernameSingleton.getKnownInstance().LocalUsername).child("answers").child(index).setValue(answers.get(m));
+                        }
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
 
                 }
             });
