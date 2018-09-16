@@ -23,6 +23,7 @@ import com.google.firebase.database.Query;
 public class ChatActivity extends AppCompatActivity {
     private DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
     private FirebaseListAdapter<ChatMessage> adapter;
+    private localUsernameSingleton testObject = localUsernameSingleton.getInstance("aaron");
 
     // TODO: add class to databaseRef, and implement getUser
     @Override
@@ -39,7 +40,8 @@ public class ChatActivity extends AppCompatActivity {
                 EditText input = (EditText) findViewById(R.id.edittext_chatbox);
 
                 // Read the input field and display the ChatMessage
-                databaseRef.push().setValue(new ChatMessage(input.getText().toString(), new User("aaron", "12345")));
+                localUsernameSingleton username = localUsernameSingleton.getKnownInstance();
+                databaseRef.child("Message").push().setValue(new ChatMessage(input.getText().toString(), username.LocalUsername));
 
                 // Clear the input after message has been sent
                 input.setText("");
@@ -64,7 +66,7 @@ public class ChatActivity extends AppCompatActivity {
     public void displayChatMessage() {
         ListView listMessages = (ListView) findViewById(R.id.listview_message_list);
 
-        Query query = this.databaseRef;
+        Query query = this.databaseRef.child("Message");
 
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
                 .setQuery(query, ChatMessage.class)
@@ -81,7 +83,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 // Set their text
                 messageText.setText(model.getBody());
-                messageUser.setText(model.getSender().username);
+                messageUser.setText(model.getSender());
 
                 // Format the date before showing it
                 messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",

@@ -17,5 +17,9 @@ public class localUsernameSingleton {
         return instance;
     }
 
+    public static localUsernameSingleton getKnownInstance(){
+
+        return instance;
+    }
 
 }
