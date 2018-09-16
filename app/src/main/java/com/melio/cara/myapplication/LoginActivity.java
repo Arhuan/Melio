@@ -258,6 +258,7 @@ public class LoginActivity extends AppCompatActivity{
                                 Log.d("testing user data", "User username: " + databaseUser.username + "\t User password: " + databaseUser.password);
 
                             if (databaseUser.password.equals(mPassword.trim())){
+                                localUsernameSingleton.getInstance(mUsername);
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                             }
@@ -325,7 +326,8 @@ public class LoginActivity extends AppCompatActivity{
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!dataSnapshot.exists()){
-                        //Toast.makeText(getApplicationContext(), "username not registered", Toast.LENGTH_LONG).show();
+                        localUsernameSingleton test = localUsernameSingleton.getInstance(mUsername);
+                        Log.d("Singleton String = ", test.LocalUsername);
                         User newUser = new User(mUsername, mPassword);
                         databaseRef.child("users").child(mUsername).setValue(newUser); 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
