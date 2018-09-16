@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button chatButton = findViewById(R.id.roomButton);
         Button postButton = findViewById(R.id.PostAdd);
-        getPosts();
+        //getPosts();
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     protected void getPosts(){
         int numPosts = 5;
 
-        Query query = databaseRef.child("posts").limitToFirst(numPosts);
+        Query query = databaseRef.child("posts").orderByChild("header");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 String[] Headers = null;
                 String[]  Bodies = null;
                 if (dataSnapshot.exists()){
-                    for (DataSnapshot Post: dataSnapshot.getChildren()){
-                        Post databasePost = Post.getValue(Post.class);
+                    for (DataSnapshot posting: dataSnapshot.getChildren()){
+                        Post databasePost = posting.getValue(Post.class);
                         Headers[pos] = databasePost.getHeader();
                         Bodies[pos] = databasePost.getBody();
 

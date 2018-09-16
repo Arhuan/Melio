@@ -20,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
+
 public class PostActivity extends AppCompatActivity {
 
     private TextInputEditText inpHead;
@@ -100,8 +102,8 @@ public class PostActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        Post newPost = new Post("test",Header,Body);
-                        databaseRef.child("posts").child(newPost.postdate.toString()).setValue(newPost);
+                        Post newPost = new Post(Header,Body);
+                        databaseRef.child("posts").child(new Date().toString()).setValue(newPost);
 
                 }
 

@@ -46,8 +46,7 @@ public class ModActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object o = postList.getItemAtPosition(position);
                 Post p = (Post) o;
-                p.setApproval(true);
-                databaseRef.child("posts").child(p.postdate.toString()).setValue(p);
+
                }
         });
 

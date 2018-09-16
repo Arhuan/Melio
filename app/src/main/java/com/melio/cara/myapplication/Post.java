@@ -1,20 +1,13 @@
 package com.melio.cara.myapplication;
 
-import java.util.Date;
 
 public class Post {
-    private String poster;
     private String header;
     private String body;
-    boolean approval;
-    Date postdate;
 
-    public Post(String poster, String header, String body){
-        this.poster = poster;
+    public Post(String header, String body){
         this.header = header;
         this.body = body;
-        this.approval = false;
-        this.postdate = new Date();
     }
 
     public Post(){}
@@ -25,10 +18,6 @@ public class Post {
 
     public String getBody(){
         return this.body;
-    }
-
-    public void setApproval(boolean approval){
-        this.approval = approval;
     }
 
     public void updateHeader(String header){

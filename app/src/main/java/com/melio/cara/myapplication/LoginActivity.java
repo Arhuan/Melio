@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity{
         mDemoButton.setOnClickListener(new OnClickListener(){
             @Override
             public  void onClick(View view){
-                runDemo();
+                //runDemo();
             }
         });
     }
