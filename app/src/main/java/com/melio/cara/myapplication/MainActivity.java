@@ -30,13 +30,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        Button chatButton = findViewById(R.id.roomButton);
+
         getPosts();
 
-        Button chatButton = findViewById(R.id.chatButton);
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ChatActivity.class));
+                startActivity(new Intent(getApplicationContext(), RoomActivity.class));
             }
         });
 
@@ -46,29 +49,29 @@ public class MainActivity extends AppCompatActivity {
 
     protected void getPosts(){
         int numPosts = 5;
-        Query query = databaseRef.child("posts").child("approved").equalTo(true).orderByChild("postdate").limitToFirst(numPosts);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    for (DataSnapshot Post: dataSnapshot.getChildren()){
-                        Post databasePost = Post.getValue(Post.class);
-
-                        ForumList listAdapter = new ForumList(MainActivity.this,databasePost.getHeader(),databasePost.getBody());
-                        forumposts = (ListView)findViewById(R.id.forum);
-                        forumposts.setAdapter(listAdapter);
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-
-            }
-        });
+//        Query query = databaseRef.child("posts").orderByChild("postdate").limitToFirst(numPosts);
+//        query.addListenerForSingleValueEvent(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()){
+//                    for (DataSnapshot Post: dataSnapshot.getChildren()){
+//                        Post databasePost = Post.getValue(Post.class);
+//
+//                        ForumList listAdapter = new ForumList(MainActivity.this,databasePost.getHeader(),databasePost.getBody());
+//                        forumposts = (ListView)findViewById(R.id.forum);
+//                        forumposts.setAdapter(listAdapter);
+//
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//
+//            }
+//        });
     }
 
 }

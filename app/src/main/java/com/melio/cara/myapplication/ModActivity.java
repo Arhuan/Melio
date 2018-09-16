@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,21 +34,22 @@ public class ModActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mod);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ListView postList = (ListView)findViewById(R.id.pendingPosts);
+        final ListView postList = (ListView)findViewById(R.id.pendingPosts);
 
         getPosts();
 
         ArrayAdapter<Post> arrayAdapter = new ArrayAdapter<Post>(this, android.R.layout.simple_list_item_1, (List<Post>) postList);
         postList.setAdapter(arrayAdapter);
 
-//        listView.setOnItemClickListener(new OnItemClickListener() {
-//
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Object o = prestListView.getItemAtPosition(position);
-//                prestationEco str = (prestationEco)o; //As you are using Default String Adapter
-//                Toast.makeText(getBaseContext(),str.getTitle(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        postList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object o = postList.getItemAtPosition(position);
+                Post p = (Post) o;
+                p.setApproval(true);
+                databaseRef.child("posts").child(p.postdate.toString()).setValue(p);
+               }
+        });
 
         FloatingActionButton returnButton = (FloatingActionButton) findViewById(R.id.returnMain);
         returnButton.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +62,7 @@ public class ModActivity extends AppCompatActivity {
     }
 
     protected void getPosts(){
-        Query query = databaseRef.child("posts").child("approval").equalTo(false).orderByChild("postdate");
+        Query query = databaseRef.child("posts").orderByChild("postdate").equalTo(false);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

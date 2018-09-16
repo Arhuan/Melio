@@ -18,6 +18,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_rooms">RoomsActivity</string>
 
     <!-- Quiz Strings -->
     <string name="promptText">In the last 6 months, have you experienced any of the following?</string>
@@ -27,6 +28,10 @@
     <string name="a_few_times">A few times</string>
     <string name="never">Never</string>
     <string name="next">Next</string>
+
     <string name="chat">Chat</string>
-    <string name="title_activity_mod">ModActivity</string>
+    <string name="room">Rooms</string>
+
+    <string name="MELIO">MELIO(RATE): To make better</string>
+
 </resources>
