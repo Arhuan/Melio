@@ -39,7 +39,7 @@ public class ChatActivity extends AppCompatActivity {
                 EditText input = (EditText) findViewById(R.id.edittext_chatbox);
 
                 // Read the input field and display the ChatMessage
-                databaseRef.push().setValue(new ChatMessage(input.getText().toString(), new User("aaron", "12345")));
+                databaseRef.child("Messages").push().setValue(new ChatMessage(input.getText().toString(), new User("aaron", "12345")));
 
                 // Clear the input after message has been sent
                 input.setText("");
