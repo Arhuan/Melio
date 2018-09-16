@@ -15,7 +15,7 @@ public class User {
     }
 
     public User(String username,String password) {
-        for(int x = 1; x<=12; x++){
+        for(int x = 1; x<=5; x++){
             answers.add(x);
         }
         this.username = username;
