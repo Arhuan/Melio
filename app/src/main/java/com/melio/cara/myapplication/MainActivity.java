@@ -54,29 +54,29 @@ public class MainActivity extends AppCompatActivity {
 
     protected void getPosts(){
         int numPosts = 5;
-//        Query query = databaseRef.child("posts").orderByChild("postdate").limitToFirst(numPosts);
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists()){
-//                    for (DataSnapshot Post: dataSnapshot.getChildren()){
-//                        Post databasePost = Post.getValue(Post.class);
-//
-//                        ForumList listAdapter = new ForumList(MainActivity.this,databasePost.getHeader(),databasePost.getBody());
-//                        forumposts = (ListView)findViewById(R.id.forum);
-//                        forumposts.setAdapter(listAdapter);
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//
-//            }
-//        });
+        Query query = databaseRef.child("posts").limitToFirst(numPosts);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot Post: dataSnapshot.getChildren()){
+                        Post databasePost = Post.getValue(Post.class);
+
+                        ForumList listAdapter = new ForumList(MainActivity.this,databasePost.getHeader(),databasePost.getBody());
+                        forumposts = (ListView)findViewById(R.id.forum);
+                        forumposts.setAdapter(listAdapter);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+            }
+        });
     }
 
 }

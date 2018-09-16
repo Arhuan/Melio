@@ -3,13 +3,13 @@ package com.melio.cara.myapplication;
 import java.util.Date;
 
 public class Post {
-    private User poster;
+    private String poster;
     private String header;
     private String body;
     boolean approval;
     Date postdate;
 
-    public Post(User poster, String header, String body){
+    public Post(String poster, String header, String body){
         this.poster = poster;
         this.header = header;
         this.body = body;

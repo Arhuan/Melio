@@ -26,7 +26,6 @@ public class PostActivity extends AppCompatActivity {
     private TextInputEditText inpBody;
 
     private DatabaseReference databaseRef;
-    //databaseRef = FirebaseDatabase.getInstance().getReference();
 
     private writePost wPost = null;
 
@@ -38,6 +37,7 @@ public class PostActivity extends AppCompatActivity {
         inpHead = findViewById(R.id.HeaderBox);
         inpBody = findViewById(R.id.BodyBox);
 
+        databaseRef = FirebaseDatabase.getInstance().getReference();
         Button createPostButton = findViewById(R.id.CreatePostButton);
         createPostButton.setOnClickListener(new View.OnClickListener() {
 
@@ -99,11 +99,10 @@ public class PostActivity extends AppCompatActivity {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!dataSnapshot.exists()) {
-                        User testUSER = new User("test","12345");
-                        Post newPost = new Post(testUSER,Header,Body);
+
+                        Post newPost = new Post("test",Header,Body);
                         databaseRef.child("posts").child(newPost.postdate.toString()).setValue(newPost);
-                    }
+
                 }
 
                 @Override
