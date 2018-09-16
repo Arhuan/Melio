@@ -54,20 +54,26 @@ public class MainActivity extends AppCompatActivity {
 
     protected void getPosts(){
         int numPosts = 5;
+
         Query query = databaseRef.child("posts").limitToFirst(numPosts);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int pos = 0;
+                String[] Headers = null;
+                String[]  Bodies = null;
                 if (dataSnapshot.exists()){
                     for (DataSnapshot Post: dataSnapshot.getChildren()){
                         Post databasePost = Post.getValue(Post.class);
+                        Headers[pos] = databasePost.getHeader();
+                        Bodies[pos] = databasePost.getBody();
 
-                        ForumList listAdapter = new ForumList(MainActivity.this,databasePost.getHeader(),databasePost.getBody());
-                        forumposts = (ListView)findViewById(R.id.forum);
-                        forumposts.setAdapter(listAdapter);
-
+                        pos++;
                     }
+                    ForumList listAdapter = new ForumList(MainActivity.this,Headers,Bodies);
+                    forumposts = (ListView)findViewById(R.id.forum);
+                    forumposts.setAdapter(listAdapter);
                 }
             }
 
