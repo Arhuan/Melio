@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "231089243213",
+    "firebase_url": "https://melio-6cb5e.firebaseio.com",
+    "project_id": "melio-6cb5e",
+    "storage_bucket": "melio-6cb5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231089243213:android:43187bb335842bda",
+        "android_client_info": {
+          "package_name": "com.melio.cara.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231089243213-fcoreoujge2j77dh4pu6gok7uq5mu7o2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.melio.cara.myapplication",
+            "certificate_hash": "8e31979063a5f50ae47eb18da1100f0646d0da17"
+          }
+        },
+        {
+          "client_id": "231089243213-u34qho0c7m1eh3lvq443hae26bik5lva.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.melio.cara.myapplication",
+            "certificate_hash": "7ea5307af9913bb7f1c201f8e8b5678d94708e86"
+          }
+        },
+        {
+          "client_id": "231089243213-ckq6phq8gesp8curchn1op1m090vd0op.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuDy40QwmrwHGNiWE8CK2Oogcyx-FwhrA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231089243213-ckq6phq8gesp8curchn1op1m090vd0op.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
