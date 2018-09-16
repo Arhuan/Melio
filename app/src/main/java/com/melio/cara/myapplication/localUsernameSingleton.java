@@ -4,22 +4,18 @@ public class localUsernameSingleton {
 
     private static localUsernameSingleton instance;
 
-    private String LocalUsername;
+    public String LocalUsername;
 
-    private localUsernameSingleton(){
-        LocalUsername = "";
+    private localUsernameSingleton(String username){
+        LocalUsername = username;
     }
 
     public static localUsernameSingleton getInstance(String username){
         if (instance == null){
-            instance = new localUsernameSingleton();
-            instance.LocalUsername =  username;
+            instance = new localUsernameSingleton(username);
         }
         return instance;
     }
 
-    public String getLocalUsername(){
-        return LocalUsername;
-    }
 
 }
