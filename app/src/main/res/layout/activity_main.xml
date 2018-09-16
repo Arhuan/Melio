@@ -8,11 +8,11 @@
     tools:layout_editor_absoluteY="81dp">
 
     <Button
-        android:id="@+id/chatButton"
+        android:id="@+id/roomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="@string/chat"
+        android:text="@string/room"
         app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,8 +22,9 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
         android:text="Button"
-        tools:layout_editor_absoluteX="148dp"
+        app:layout_constraintLeft_toRightOf="@+id/roomButton"
         tools:layout_editor_absoluteY="4dp" />
 
     <TextView
