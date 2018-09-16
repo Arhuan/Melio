@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void getPosts(){
-        Query query = databaseRef.child("posts").orderByChild("postdate").limitToFirst(5);
+        Query query = databaseRef.child("posts").child("approved").equalTo(true).orderByChild("postdate").limitToFirst(5);
         //TODO:populate our list view
     }
 
