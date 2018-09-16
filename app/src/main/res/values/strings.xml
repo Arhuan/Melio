@@ -26,4 +26,5 @@
     <string name="never">Never</string>
     <string name="next">Next</string>
     <string name="chat">Chat</string>
+    <string name="title_activity_mod">ModActivity</string>
 </resources>
