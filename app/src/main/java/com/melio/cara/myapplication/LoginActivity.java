@@ -258,7 +258,8 @@ public class LoginActivity extends AppCompatActivity{
                                 Log.d("testing user data", "User username: " + databaseUser.username + "\t User password: " + databaseUser.password);
 
                             if (databaseUser.password.equals(mPassword.trim())){
-                                Intent intent = new Intent(getApplicationContext(), Quiz.class);
+                                localUsernameSingleton.getInstance(mUsername);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                             }
                             else {
@@ -325,10 +326,10 @@ public class LoginActivity extends AppCompatActivity{
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!dataSnapshot.exists()){
-                        //Toast.makeText(getApplicationContext(), "username not registered", Toast.LENGTH_LONG).show();
+                        localUsernameSingleton.getInstance(mUsername);
                         User newUser = new User(mUsername, mPassword);
                         databaseRef.child("users").child(mUsername).setValue(newUser); 
-                        Intent intent = new Intent(getApplicationContext(), Quiz.class);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     }
                 }
