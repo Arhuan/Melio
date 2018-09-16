@@ -258,7 +258,7 @@ public class LoginActivity extends AppCompatActivity{
                                 Log.d("testing user data", "User username: " + databaseUser.username + "\t User password: " + databaseUser.password);
 
                             if (databaseUser.password.equals(mPassword.trim())){
-                                Intent intent = new Intent(getApplicationContext(), Quiz.class);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                             }
                             else {
