@@ -52,7 +52,7 @@ public class ChatActivity extends AppCompatActivity {
     public void displayChatMessage() {
         ListView listMessages = (ListView) findViewById(R.id.listview_message_list);
 
-        Query query = this.databaseRef.child("username");
+        Query query = this.databaseRef.child("Messages");
 
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
                 .setQuery(query, ChatMessage.class)
