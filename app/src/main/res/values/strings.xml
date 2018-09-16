@@ -26,6 +26,8 @@
     <string name="a_few_times">A few times</string>
     <string name="never">Never</string>
     <string name="next">Next</string>
+
     <string name="chat">Rooms</string>
     <string name="MELIO">MELIO(RATE): To make better</string>
+
 </resources>

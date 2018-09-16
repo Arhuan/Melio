@@ -25,6 +25,7 @@
         <activity android:name=".MainActivity"></activity>
 
 
+
         <activity
             android:name=".ChatActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -37,6 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".RoomActivity"
@@ -44,6 +47,7 @@
 
         </activity>
         <activity android:name=".Quiz" />
+        <activity android:name=".PostActivity"></activity>
     </application>
 
 </manifest>

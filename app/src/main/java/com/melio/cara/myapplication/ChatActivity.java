@@ -39,8 +39,10 @@ public class ChatActivity extends AppCompatActivity {
                 EditText input = (EditText) findViewById(R.id.edittext_chatbox);
 
                 // Read the input field and display the ChatMessage
+
                 localUsernameSingleton username = localUsernameSingleton.getKnownInstance();
                 databaseRef.child("Message").push().setValue(new ChatMessage(input.getText().toString(), username.LocalUsername));
+
 
                 // Clear the input after message has been sent
                 input.setText("");
@@ -65,7 +67,9 @@ public class ChatActivity extends AppCompatActivity {
     public void displayChatMessage() {
         ListView listMessages = (ListView) findViewById(R.id.listview_message_list);
 
+
         Query query = this.databaseRef.child("Message");
+
 
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
                 .setQuery(query, ChatMessage.class)
