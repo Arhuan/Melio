@@ -8,10 +8,10 @@ import java.util.Date;
 
 public class ChatMessage {
     private String body;
-    private String sender;
+    private User sender;
     private long timeSent;
 
-    public ChatMessage(String text, String sender) {
+    public ChatMessage(String text, User sender) {
         this.body = text;
         this.sender = sender;
         this.timeSent = new Date().getTime();
@@ -33,7 +33,7 @@ public class ChatMessage {
         return this.body;
     }
 
-    public String getSender() {
+    public User getSender() {
         return this.sender;
     }
 
