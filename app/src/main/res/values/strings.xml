@@ -27,7 +27,9 @@
     <string name="never">Never</string>
     <string name="next">Next</string>
 
-    <string name="chat">Rooms</string>
+    <string name="chat">Chat</string>
+    <string name="room">Rooms</string>
+
     <string name="MELIO">MELIO(RATE): To make better</string>
 
 </resources>

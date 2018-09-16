@@ -37,6 +37,8 @@ public class RoomActivity extends AppCompatActivity {
 
     public void enterChat(View view) {
         Intent chatIntent = new Intent(this, ChatActivity.class);
+        TextView roomView = (TextView) view;
+        chatIntent.putExtra("roomName", roomView.getText().toString());
         startActivity(chatIntent);
     }
 
