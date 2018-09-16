@@ -8,10 +8,15 @@ import java.util.Date;
 
 public class ChatMessage {
     private String body;
-    private User sender;
+    private String sender;
     private long timeSent;
 
-    public ChatMessage(String text, User sender) {
+
+    public ChatMessage() {
+        // Default constructor required for calls to DataSnapshot.getValue(ChatMessage.class)
+    }
+
+    public ChatMessage(String text, String sender) {
         this.body = text;
         this.sender = sender;
         this.timeSent = new Date().getTime();
@@ -21,7 +26,7 @@ public class ChatMessage {
         this.body = text;
     }
 
-    public void setSender(User sender) {
+    public void setSender(String sender) {
         this.sender = sender;
     }
 
@@ -33,7 +38,7 @@ public class ChatMessage {
         return this.body;
     }
 
-    public User getSender() {
+    public String getSender() {
         return this.sender;
     }
 
