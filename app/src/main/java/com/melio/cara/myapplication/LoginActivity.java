@@ -329,7 +329,7 @@ public class LoginActivity extends AppCompatActivity{
                         Log.d("Singleton String = ", test.LocalUsername);
                         User newUser = new User(mUsername, mPassword);
                         databaseRef.child("users").child(mUsername).setValue(newUser); 
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), Quiz.class);
                         startActivity(intent);
                     }
                 }

@@ -15,15 +15,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+        </activity>
 
+        <activity
+            android:name=".ChatActivity"
+            android:label="@string/title_activity_chat"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login">            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:label="@string/title_activity_login">
 
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".Quiz" />
     </application>
 
 </manifest>
