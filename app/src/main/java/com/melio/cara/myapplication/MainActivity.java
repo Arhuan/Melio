@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getPosts();
+
         Button chatButton = findViewById(R.id.chatButton);
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
