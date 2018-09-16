@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class LoginActivity extends AppCompatActivity{
 
+
     private UserLoginTask mAuthTask = null;
     private UserRegisterTask mRegTask = null;
 
@@ -257,7 +258,6 @@ public class LoginActivity extends AppCompatActivity{
                                 Log.d("testing user data", "User username: " + databaseUser.username + "\t User password: " + databaseUser.password);
 
                             if (databaseUser.password.equals(mPassword.trim())){
-                                localUsernameSingleton.getInstance(mUsername);
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                             }
@@ -325,11 +325,10 @@ public class LoginActivity extends AppCompatActivity{
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (!dataSnapshot.exists()){
-                        localUsernameSingleton test = localUsernameSingleton.getInstance(mUsername);
-                        Log.d("Singleton String = ", test.LocalUsername);
+                        //Toast.makeText(getApplicationContext(), "username not registered", Toast.LENGTH_LONG).show();
                         User newUser = new User(mUsername, mPassword);
                         databaseRef.child("users").child(mUsername).setValue(newUser); 
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), Quiz.class);
                         startActivity(intent);
                     }
                 }
