@@ -38,7 +38,7 @@
 
         <AutoCompleteTextView
             android:id="@+id/email"
-            android:layout_width="wrap_content"
+            android:layout_width="352dp"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
@@ -61,7 +61,7 @@
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="wrap_content"
+            android:layout_width="355dp"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_password"
             android:imeActionId="6"
@@ -76,7 +76,7 @@
     <Button
         android:id="@+id/register_button"
         android:layout_width="161dp"
-        android:layout_height="70"
+        android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -91,8 +91,8 @@
     <Button
         android:id="@+id/login_button"
         style="?android:textAppearanceSmall"
-        android:layout_width="161"
-        android:layout_height="70"
+        android:layout_width="161dp"
+        android:layout_height="70dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:text="@string/action_sign_in_short"
