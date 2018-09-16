@@ -24,11 +24,13 @@ public class ChatActivity extends AppCompatActivity {
     private DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
     private FirebaseListAdapter<ChatMessage> adapter;
     private localUsernameSingleton testObject = localUsernameSingleton.getInstance("aaron");
+    private String roomName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        this.roomName = getIntent().getStringExtra("roomName");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Button sendButton = (Button) findViewById(R.id.button_chatbox_send);
@@ -40,7 +42,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 // Read the input field and display the ChatMessage
                 localUsernameSingleton username = localUsernameSingleton.getKnownInstance();
-                databaseRef.child("Message").push().setValue(new ChatMessage(input.getText().toString(), username.LocalUsername));
+                databaseRef.child(roomName).child("Message").push().setValue(new ChatMessage(input.getText().toString(), username.LocalUsername));
 
                 // Clear the input after message has been sent
                 input.setText("");
@@ -65,7 +67,7 @@ public class ChatActivity extends AppCompatActivity {
     public void displayChatMessage() {
         ListView listMessages = (ListView) findViewById(R.id.listview_message_list);
 
-        Query query = this.databaseRef.child("Message");
+        Query query = this.databaseRef.child(this.roomName).child("Message");
 
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
                 .setQuery(query, ChatMessage.class)

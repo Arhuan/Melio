@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:onClick="enterChat"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/room_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:onClick="enterChat"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"/>
