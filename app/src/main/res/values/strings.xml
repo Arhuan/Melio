@@ -1,11 +1,10 @@
 <resources>
-    <string name="app_name">My Application</string>
     <string name="title_activity_chat">ChatActivity</string>
-
+    <string name="app_name">Melio</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
@@ -18,4 +17,14 @@
         completions."
     </string>
     <string name="title_activity_rooms">RoomsActivity</string>
+
+    <!-- Quiz Strings -->
+    <string name="promptText">In the last 6 months, have you experienced any of the following?</string>
+    <string name="constantly">Constantly</string>
+    <string name="often">Often</string>
+    <string name="sometimes">Sometimes</string>
+    <string name="a_few_times">A few times</string>
+    <string name="never">Never</string>
+    <string name="next">Next</string>
+    <string name="chat">Chat</string>
 </resources>
