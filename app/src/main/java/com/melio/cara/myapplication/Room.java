@@ -20,6 +20,6 @@ public class Room {
     }
 
     public String getTitle() {
-
+        return this.title;
     }
 }

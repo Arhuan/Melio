@@ -25,7 +25,6 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseListAdapter<ChatMessage> adapter;
     private localUsernameSingleton testObject = localUsernameSingleton.getInstance("aaron");
 
-    // TODO: add class to databaseRef, and implement getUser
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +40,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 // Read the input field and display the ChatMessage
                 localUsernameSingleton username = localUsernameSingleton.getKnownInstance();
-                databaseRef.child("Message").push().setValue(new ChatMessage(input.getText().toString(), username.LocalUsername));
+                databaseRef.child("Message").push().setValue(new ChatMessage(input.getText().toString(), testObject.LocalUsername));
 
                 // Clear the input after message has been sent
                 input.setText("");
