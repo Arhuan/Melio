@@ -18,7 +18,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import sun.applet.Main;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getPosts();
         Button chatButton = findViewById(R.id.chatButton);
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
                         Post databasePost = Post.getValue(Post.class);
 
                         ForumList listAdapter = new ForumList(MainActivity.this,databasePost.getHeader(),databasePost.getBody());
-                        //forumposts = (ListView)findViewById(R.id.forum);
-                        //forumposts.setAdapter(listAdapter);
+                        forumposts = (ListView)findViewById(R.id.forum);
+                        forumposts.setAdapter(listAdapter);
 
                     }
                 }
