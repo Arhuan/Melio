@@ -11,6 +11,11 @@ public class ChatMessage {
     private User sender;
     private long timeSent;
 
+
+    public ChatMessage() {
+        // Default constructor required for calls to DataSnapshot.getValue(ChatMessage.class)
+    }
+
     public ChatMessage(String text, User sender) {
         this.body = text;
         this.sender = sender;

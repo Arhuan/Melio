@@ -49,17 +49,29 @@ public class ChatActivity extends AppCompatActivity {
         displayChatMessage();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.adapter.stopListening();
+    }
+
     public void displayChatMessage() {
         ListView listMessages = (ListView) findViewById(R.id.listview_message_list);
 
-        Query query = this.databaseRef.child("username");
+        Query query = this.databaseRef;
 
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
                 .setQuery(query, ChatMessage.class)
-                .setLayout(R.layout.item_message_sent)
+                .setLayout(R.layout.item_message_received)
                 .build();
 
-        adapter = new FirebaseListAdapter<ChatMessage>(options) {
+        this.adapter = new FirebaseListAdapter<ChatMessage>(options) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
                 // Get references to the views of message.xml
@@ -77,7 +89,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        listMessages.setAdapter(adapter);
+        listMessages.setAdapter(this.adapter);
     }
 
 }
