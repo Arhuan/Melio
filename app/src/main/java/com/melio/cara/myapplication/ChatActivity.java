@@ -40,7 +40,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 // Read the input field and display the ChatMessage
                 localUsernameSingleton username = localUsernameSingleton.getKnownInstance();
-                databaseRef.child("Message").push().setValue(new ChatMessage(input.getText().toString(), testObject.LocalUsername));
+                databaseRef.child("Message").push().setValue(new ChatMessage(input.getText().toString(), username.LocalUsername));
 
                 // Clear the input after message has been sent
                 input.setText("");
