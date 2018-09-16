@@ -264,9 +264,9 @@ public class LoginActivity extends AppCompatActivity{
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()){
                         for (DataSnapshot user: dataSnapshot.getChildren()){
-                                User user2 = user.getValue(User.class);
+                                User databaseUser = user.getValue(User.class);
 
-                            if (user2.password.equals(mPassword.trim())){
+                            if (databaseUser.password.equals(mPassword.trim())){
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                             }
@@ -324,17 +324,27 @@ public class LoginActivity extends AppCompatActivity{
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            Query query = databaseRef.child("users").equalTo(mEmail.trim());
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.exists()){
+                        //Toast.makeText(getApplicationContext(), "Email not registered", Toast.LENGTH_LONG).show();
+                        databaseRef.child("users").child("email").setValue(mEmail);
+                        databaseRef.child("users").child("password").setValue(mPassword);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
 
-            // TODO: register the new account here.
+                }
+            });
+
             return true;
         }
 
