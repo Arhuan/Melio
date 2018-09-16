@@ -2,11 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.melio.cara.myapplication">
 
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="18" />
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-sdk android:targetSdkVersion="18" android:minSdkVersion="11"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat"
@@ -29,8 +34,11 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="@string/title_activity_login"></activity>
+        <activity
+            android:name=".RoomActivity"
+            android:label="@string/title_activity_rooms"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
